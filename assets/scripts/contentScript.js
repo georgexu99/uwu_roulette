@@ -1,67 +1,69 @@
 console.log("uwu - Content Script is Running");
 
+let uwuified = false;
 
+document.addEventListener('click', function(e) {    
+    // shouldn't trigger on link click, else 
+    // every mouseclick has a chance to uwuify your webpage
+    let href = e.target.href;
+    if (!href && !uwuified) {
+        rouletteInit();
+    }
+}, false);
+
+
+// function gets called on mouseclick
 const rouletteInit = () => {
     const number = Math.floor(Math.random() * 5);
-    console.log('NUMBERIS' + number);
-    window.alert("sometext");
     if (number === 1) {
         imagefy();
-        textify();
+        walk(document.body);
+        uwuified = true;
     }
 };
 
-const textify = () => {
-    let observer = new MutationObserver(function(mutations) {
-        // For the sake of...observation...let's output the mutation to console to see how this all works
-        mutations.forEach(function(mutation) {
-            walk(document.body);
-        });
-    });
-    
-    // Notify me of everything!
-    let observerConfig = {
-        attributes: true,
-        childList: true,
-        characterData: true
+const walk = (node) => {
+    console.log('walking1');
+    let ignore = { "STYLE":0, "SCRIPT":0, "NOSCRIPT":0, "IFRAME":0, "OBJECT":0, "PRE":0 };
+    // I stole this function from here:
+    // http://is.gd/mwZp7E
+    let child, next;
+
+    if (node.nodeName.toLowerCase() == 'input' || node.nodeName.toLowerCase() == 'textarea' || (node.classList && node.classList.contains('ace_editor')) || (node.tagName in ignore)) {
+        return;
     };
-    
-    // Node, config
-    // In this case we'll listen to all changes to body and child nodes
-    let targetNode = document.body;
-    observer.observe(targetNode, observerConfig);
-    
-    function walk(node) {
-        let ignore = { "STYLE":0, "SCRIPT":0, "NOSCRIPT":0, "IFRAME":0, "OBJECT":0, "PRE":0 };
-        // I stole this function from here:
-        // http://is.gd/mwZp7E
-        let child, next;
 
-        if (node.nodeName.toLowerCase() == 'input' || node.nodeName.toLowerCase() == 'textarea' || (node.classList && node.classList.contains('ace_editor')) || (node.tagName in ignore)) {
-            return;
-        };
-
-        switch ( node.nodeType ) {
-            case 1:  // Element
-            case 9:  // Document
-            case 11: // Document fragment
-                child = node.firstChild;
-                while ( child ) {
-                    next = child.nextSibling;
-                    walk(child);
-                    child = next;
-                }
-                break;
-            case 3: // Text node
-                handleText(node);
-                break;
-        };
+    switch ( node.nodeType ) {
+        case 1:  // Element
+        case 9:  // Document
+        case 11: // Document fragment
+            child = node.firstChild;
+            while ( child ) {
+                next = child.nextSibling;
+                walk(child);
+                child = next;
+            }
+            break;
+        case 3: // Text node
+            handleText(node);
+            break;
     };
 };
 
-const handleText = (node) => {
-    
-}
+const handleText = (textNode) => {
+    console.log('textifying2');
+    let v = textNode.nodeValue;
+
+	v = v.replace(/(?:r|l)/g, "w");
+    v = v.replace(/(?:R|L)/g, "W");
+	v = v.replace(/n([aeiou])/g, 'ny$1');
+	v = v.replace(/N([aeiou])/g, 'Ny$1');
+	v = v.replace(/N([AEIOU])/g, 'Ny$1');
+	v = v.replace(/ove/g, "uv");
+
+	textNode.nodeValue = v;
+};
+
 const imagefy = () => {
     const imgs = document.getElementsByTagName('img');
     const fileNames = ['uwu.png'];
@@ -73,7 +75,4 @@ const imagefy = () => {
         img.src = url;
         console.log(url);
     }
-}
-
-rouletteInit();
-imagefy();
+};
