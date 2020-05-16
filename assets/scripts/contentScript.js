@@ -65,7 +65,7 @@ const handleText = (textNode) => {
 
 const showPopup = () => {
     var myWindow = window.open("", "MsgWindow", "width=700,height=600");
-    myWindow.document.write("<head><title>u have been uwu'd!</title></head>");
+    myWindow.document.write("<head><title>You have been uwu'd!</title></head>");
     myWindow.document.write("<iframe autoplay width='100%' height='100%' src='https://www.youtube.com/embed/0NL9R5pGakc?autoplay=1' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>");
 };
 
