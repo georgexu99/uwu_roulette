@@ -65,7 +65,7 @@ const handleText = (textNode) => {
 
 const showPopup = () => {
     var myWindow = window.open("", "MsgWindow", "width=600,height=600");
-    myWindow.document.write("<iframe autoplay width='1920' height='1080' src='https://www.youtube.com/embed/qU_o0dCzr8A?autoplay=1' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>");
+    myWindow.document.write("<iframe autoplay width='100%' height='100%' src='https://www.youtube.com/embed/qU_o0dCzr8A?autoplay=1' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>");
 };
 
 const imagefy = () => {
@@ -73,7 +73,7 @@ const imagefy = () => {
     const fileNames = ['uwu.png','uwu1.jpg','uwu2.png','uwu3.jpg','owo.png','uwu4.jpg','uwu5.jpg','uwu6.gif'];
     // replace image with random uwu face from fileNames
     for (img of imgs) {
-        const r = Math.floor(Math.random() * fileNames.length - 1);
+        const r = Math.floor(Math.random() * fileNames.length);
         let fileName = 'assets/images/' + fileNames[r];
         let url = chrome.extension.getURL(fileName);
         img.src = url;
