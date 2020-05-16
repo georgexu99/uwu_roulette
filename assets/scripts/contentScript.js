@@ -70,7 +70,7 @@ const showPopup = () => {
 
 const imagefy = () => {
     const imgs = document.getElementsByTagName('img');
-    const fileNames = ['uwu.png'];
+    const fileNames = ['uwu.png','uwu1.jpg','uwu2.png','uwu3.jpg','owo.png','uwu4.jpg','uwu5.jpg','uwu6.gif'];
     // replace image with random uwu face from fileNames
     for (img of imgs) {
         const r = Math.floor(Math.random() * fileNames.length - 1);
