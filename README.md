@@ -7,4 +7,5 @@ navigate to chrome://extensions, make sure that the Developer mode switch is tur
 If it worked you should see an icon for the uwu_roulette Chrome extension.
 
 Removing the extension:
+
 To remove the extension, click Remove on the extension page, or use the Remove from Chrome... menu option when right clicking the icon.
